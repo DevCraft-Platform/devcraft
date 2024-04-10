@@ -1,0 +1,11 @@
+{% macro render(title, content, icon, link) %}
+<div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mt-5 flex justify-center flex-col m-auto content-center transform delay-75 transition-all hover:scale-105 select-none hover:cursor-pointer w-[500px] h-full">
+    <a href="{{link}}" class="flex px-3 hover:underline">
+        <h5 class="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">{{ title }}<i class="fa-solid {{icon}} flex px-3 items-center"></i></h5>
+    </a>
+    <p class="mb-5 px-5 font-normal text-gray-500 dark:text-gray-400">
+        {{ content }}
+    </p>
+    <br>
+</div>
+{% endmacro %}

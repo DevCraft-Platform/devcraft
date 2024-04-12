@@ -47,13 +47,10 @@ def db_insert_user(data):
     Insert Data into the Database
     """
     try:
-        conn = db_connect()
-        cursor = conn.cursor()
-        query = "INSERT INTO users (username, password, email, role, created_at) VALUES (?, ?, ?, ?, ?)"
-        values = (data['username'], data['password'], data['email'], data['role'], str(data['created_at']))
-        cursor.execute(query, values)
+        conn = libsql.connect(DB_NAME, sync_url=DB_HOST, auth_token=DB_AUTH_TOKEN)
+        conn.execute("INSERT INTO users (username, password, email) VALUES (?, ?, ?)", (data['username'], data['password'], data['email']))
         conn.commit()
-        cursor.close()
+        conn.close()
         return {"status": "success", "message": "Data Inserted Successfully!"}
     except Exception as e:
         return {"status": "error", "message": f"Error: {e}"}
@@ -64,15 +61,10 @@ def db_select_user(data):
     """
     Select User from the Database
     """
-    conn = db_connect()
-    cursor = conn.cursor()
-    query = "SELECT * FROM users WHERE username = ? AND password = ?"
-    values = (data['username'], data['password'])
-    cursor.execute(query, values)
-    data = cursor.fetchall()
-    cursor.close()
+    conn = libsql.connect(DB_NAME, sync_url=DB_HOST, auth_token=DB_AUTH_TOKEN)
+    user = conn.execute("SELECT * FROM users WHERE username = ? AND password = ?", (data['username'], data['password']))
+    data = user.fetchall()
     return data
-
 
 
 def main():

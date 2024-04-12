@@ -25,10 +25,17 @@
 
 
 // Importing Id's
-const emailInput = document.querySelector('#email');
-const passwordInput = document.querySelector('#password');
-const repeatPasswordInput = document.querySelector('#confirm-password');
-const signupForm = document.querySelector('#su-form');
+const emailInput = document.getElementById('email');
+const passwordInput = document.getElementById('password');
+const repeatPasswordInput = document.getElementById('confirm-password');
+const signupForm = document.getElementById('su-form');
+
+// Steps ID
+const step1Icon = document.getElementById('step-1');
+const step2Icon = document.getElementById('step-2');
+const step3Icon = document.getElementById('step-3');
+const step4Icon = document.getElementById('step-4');
+const step5Icon = document.getElementById('step-5');
 
 // Animation on entrance
 /*
@@ -87,11 +94,86 @@ const repeatPasswordValidator = (password, repeatPassword) => {
 };
 
 const signup = async (email, password) => {
+    // First lets see if the password is the same as the repeat password
+    repeatPasswordInput.addEventListener('change', () => {
+        if (passwordInput.value !== repeatPasswordInput.value) {
+            repeatPasswordInput.setCustomValidity('Passwords do not match');
+        } else {
+            repeatPasswordInput.setCustomValidity('');
+        }
+    })
+
+    // Now lets validate the email
+    emailInput.addEventListener('change', () => {
+        if (!emailValidator(emailInput.value)) {
+            emailInput.setCustomValidity('Invalid email');
+        } else {
+            emailInput.setCustomValidity('');
+        }
+    });
+
+    // Now lets validate the password
+    passwordInput.addEventListener('change', () => {
+        if (!passwordValidator(passwordInput.value)) {
+            passwordInput.setCustomValidity('Invalid password');
+        } else {
+            passwordInput.setCustomValidity('');
+        }
+    });
+    // Now let's show the password requirements
+    passwordInput.addEventListener('input', () => {
+        const password = passwordInput.value;
+        const isValid = passwordValidator(password);  // Call your password validation function
+      
+        // Update step-1 icon based on password strength (assuming icon exists)
+        const step1Icon = document.getElementById('step-1-icon'); // Assuming ID exists
+        if (isValid) {
+          step1Icon.classList.add('valid'); // Add 'valid' class for visual confirmation (e.g., green checkmark)
+          step1Icon.classList.remove('invalid'); // Remove any 'invalid' class (e.g., red X)
+        } else {
+          step1Icon.classList.add('invalid'); // Add 'invalid' class for visual feedback (e.g., red X)
+          step1Icon.classList.remove('valid'); // Remove any 'valid' class
+        }
+      
+        // Optionally hide requirements once password is valid (consider user preference):
+        if (isValid) {
+          passwordRequirements.style.display = 'none'; // Hide requirements if password is strong
+        }
+      });
+      
+      // Example password validation function (replace with your actual logic)
+      function passwordValidator(password) {
+        // Implement your custom password strength checks here (e.g., length, uppercase, lowercase, numbers, symbols)
+        // Return true if password meets requirements, false otherwise
+        return password.length >= 8 && // Minimum length
+               /[a-z]/.test(password) && // Lowercase letter
+               /[A-Z]/.test(password) && // Uppercase letter
+               /[0-9]/.test(password);   // Number
+      }
+
+    // If all this is done, we can submit the form
     signupForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        if (!emailValidator(email)) {
-            Notification.caller('error', 'Invalid email address');
-            return;
+        const username = emailInput.value;
+        const password = passwordInput.value;
+
+        // Now lets send the data to the server
+        const response = await fetch('/api/v1/signup', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username, password })
+        });
+
+        // Now lets check the response
+        if (response.ok) {
+            // If the response is ok, we can redirect to the dashboard
+            window.location.href = '/app/dashboard';
+        } else {
+            // If the response is not ok, we can show an error message
+            const data = await response.json();
+            alert(data.message);
         }
     });
 }

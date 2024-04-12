@@ -3,6 +3,7 @@ import cryptography.utils
 from flask import Flask, render_template, request, testing, jsonify
 from utils import db_connect, password_encrypt as pe
 import bcrypt
+import datetime
 
 app = Flask(__name__)
 
@@ -30,58 +31,19 @@ def render_api():
         "Auth": "None"
     }
 
-@app.route("/api/v1/", methods=["GET"])
-def render_users():
-    # Check if the API Token (Barrer Token) is valid.
-    token = request.headers.get("Authorization")
-    database = db_connect.db_connect()
-    cursor = database.cursor()
-    # Now we stract the token from the database and compare it with the token provided by the user.
-    query = "SELECT * FROM api_tokens WHERE token = ?"
-    values = (token,)
-    cursor.execute(query, values)
-    api_token = cursor.fetchall()
-    if api_token:
-        # now we can return the users
-        q = "SELECT * FROM users"
-        cursor.execute(q)
-        users = cursor.fetchall()
-        cursor.close()
-
-        return jsonify(users)
-    else:
-        cursor.close()
-        return jsonify({"message": "Unauthorized"}), 401
 
 @app.route("/api/v1/signin", methods=["POST"])
 def signin_process():
     try:
         username = request.get_json()["username"]
         password = request.get_json()["password"].encode()
-        print(f"Username: {username} \n Password: {password}")
-        database = db_connect.db_connect()
-        cursor = database.cursor()
-        query = "SELECT * FROM users WHERE username = ?"
-        values = (username.strip(),)
-        cursor.execute(query, values)
-        user = cursor.fetchone()
-        # Now we can check if the user password is correct
-        if user:
-            encrypted_password = user[2].encode()
-            print(encrypted_password)
-            is_valid = bcrypt.checkpw(password, encrypted_password)
-            print(is_valid)
-            if is_valid:
-                cursor.close()
-                return jsonify({"message": "User Authenticated"})
-            else:
-                cursor.close()
-                return jsonify({"message": "Invalid Credentials"}), 401
+        user = db_connect.db_select_user(dict(username=username))
+        if bcrypt.checkpw(password, user["password"].encode()):
+            return jsonify({"message": "User Authenticated"})
         else:
-            cursor.close()
-            print("User not found")
             return jsonify({"message": "Invalid Credentials"}), 401
-    except KeyError:
+    except KeyError as e:
+        print(f"Key Error: {e}")
         return jsonify({"message": "Invalid Request"}), 400
     except Exception as e:
         return jsonify({"message": str(e)}), 500
@@ -93,15 +55,14 @@ def signup_process():
         password = request.get_json()["password"].encode()
         encrypted_password = bcrypt.hashpw(password, bcrypt.gensalt())
         print(f"Username: {username} \n Password: {password}")
-        database = db_connect.db_connect()
-        cursor = database.cursor()
-        query = "INSERT INTO users (username, password) VALUES (?, ?)"
-        values = (username.strip(), encrypted_password)
-        cursor.execute(query, values)
-        database.commit()
-        cursor.close()
+        db_connect.db_insert_user(dict(
+            username=username,
+            password=encrypted_password.decode(),
+            email=request.get_json()["email"]
+        ))
         return jsonify({"message": "User Created"})
-    except KeyError:
+    except KeyError as e:
+        print(f"Key Error: {e}")
         return jsonify({"message": "Invalid Request"}), 400
     except Exception as e:
         return jsonify({"message": str(e)}), 500

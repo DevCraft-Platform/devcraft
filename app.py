@@ -1,7 +1,6 @@
 import cryptography.fernet
 import cryptography.utils
 from flask import Flask, render_template, request, testing, jsonify
-from utils import db_connect, password_encrypt as pe
 import bcrypt
 import datetime
 import json

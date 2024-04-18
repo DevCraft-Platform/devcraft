@@ -68,23 +68,11 @@ def checkDocument(document, schema):
 
 # TEST
 if __name__ == "__main__":
-    testUser = {
-        "username": "INovomiast2",
-        "password": "password",
-        "email": "example@example.com",
-        "followers": [],
-        "following": [],
-        "liked_posts": [],
-        "posts": 0,
-        "profile_picture": "default.jpg",
-        "bio": "Hello, I am a developer.",
-        "plan": "free",
-        "role": "user",
-        "created_at": "2021-10-20",
-        "updated_at": "2021-10-20"
+    db = connectDB()
+    collection = createCollection(db, "cli-user")
+    document = {
+        "username": "admin",
+        "password": "admin"
     }
-    checker = checkDocument(testUser, user.UserSchema)
-    if (checker["status"] == True):
-        print(checker["document"])
-    else:
-        print("[ERROR]:", checker["key"])
+    insertDocument(collection, document)
+    print("Document inserted.")

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <link rel="shortcut icon" href="{{favicon}}" type="image/x-icon">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: monospace;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #263238;
+            color: #fff;
+        }
+
+        .login-box {
+            width: 300px;
+            padding: 40px;
+            background: rgba(0, 0, 0, 0.8);
+            text-align: center;
+            border-radius: 10px;
+            width: 500px;
+        }
+
+        .separator {
+            margin: 10px 0;
+            border: 0;
+            height: 1px;
+            background: #fff;
+            background-image: linear-gradient(to right, #fff, #333, #fff);
+        }
+
+        .py-5 {
+            padding: 5rem 0;
+        }
+
+        .py-2 {
+            padding: 2rem 0;
+        }
+
+        .login-form {
+            height: 500px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-form input {
+            display: block;
+            width: 100%;
+            height: 50px;
+            font-size: 18px;
+            font-family: monospace;
+            padding: 10px;
+            margin: 10px 0;
+            background: #333;
+            border: 1px solid #fff;
+            color: #fff;
+            border-radius: 5px;
+            outline: none;
+            margin-top: 10px;
+        }
+
+        .login-form button {
+            width: 100%;
+            padding: 10px;
+            background: #263238;
+            border: 1px solid #fff;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+            outline: none;
+            font-size: 25px;
+            font: bold;
+            font-family: monospace;
+        }
+
+        .text-gradient {
+            background: linear-gradient(to right, #f12711, #f5af19);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="py-2">Login - DevCraft Admin CLI</h1>
+    <div class="login-box">
+        <form action="/webauth" method="post" class="login-form">
+            <img src="{{url_for('static', filename='logo.png')}}" alt="">
+            <h1>Admin Login</h1>
+            <hr class="separator">
+            <input type="text" name="username" placeholder="Username" required autocapitalize="off">
+            <input type="password" name="password" placeholder="Password" required autocomplete="off">
+            <br>
+            <button type="submit">Login to <span style="font: bolder; color: #f5af19;">AdminTools</span></button>
+        </form>
+    </div>
+    <div class="py-2">
+        <p>Powered by <a href="https://devcraft.io" class="text-gradient">DevCraft</a></p>
+    </div>
+</body>
+</html>

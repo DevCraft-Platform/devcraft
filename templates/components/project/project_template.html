@@ -1,0 +1,27 @@
+{% macro render(project_name, project_description, project_author, project_views, project_likes, project_forks) %}
+<div class="border-solid border-white border-2 sm:w-[300px] md:w-[400px] rounded-xl cursor-pointer hover:shadow-md hover:-translate-y-5 transform transition-all delay-75 hover:scale-105 hover:shadow-blue-400" data-prj-id="project-{{project_name}}">
+    <div class="rounded-tr-xl rounded-tl-xl">
+        <img src="https://img.freepik.com/free-photo/programming-background-with-person-working-with-codes-computer_23-2150010125.jpg?size=626&ext=jpg&ga=GA1.1.2008272138.1713312000&semt=sph" alt="project_social_image_{{project_author}}" class="rounded-tr-xl rounded-tl-xl">
+    </div>
+    <hr class="bg-gray-200 dark:bg-gray-700 pr-5 pl-5">
+    <div class="bg-gradient-to-b from-gray-600 to-gray-950 pl-3 rounded-b-xl">
+        <h2 class="font-bold text-xl pt-3">{{project_name}}</h2>
+        <p class="font-extralight text-gray-400 -mt-1">{{project_author}}</p>
+        <p class="">{{project_description}}</p>
+        <div class="flex pb-2 justify-end">
+            <div class="px-2">
+                <i class="fas fa-eye text-sm text-blue-400"></i>
+                <span class="text-xs">{{project_views}}</span>
+            </div>
+            <div class="px-3">
+                <i class="fas fa-heart text-sm text-red-400"></i>
+                <span class="text-xs">{{project_likes}}</span>
+            </div>
+            <div class="px-3">
+                <i class="fas fa-code-branch text-sm text-green-400"></i>
+                <span class="text-xs">{{project_forks}}</span>
+            </div>
+        </div>
+    </div>
+</div>
+{% endmacro %}

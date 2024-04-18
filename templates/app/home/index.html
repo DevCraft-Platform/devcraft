@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - DevCraft App</title>
+    <!-- TailwindCSS -->
+    <link rel="stylesheet" href="{{url_for('static', filename='src/css/output.css')}}">
+    <!-- Fontawesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="shortcut icon" href="{{url_for('static', filename='favicon.ico')}}" type="image/x-icon">
+    <!-- Animista CSS -->
+    <link rel="stylesheet" href="{{url_for('static', filename='src/css/animista.css')}}">
+</head>
+<body class="dark:bg-gray-900 dark:text-white">
+    <!-- App Imports -->
+    {% import '/components/app-navbar.html' as navbar %}
+    {% import '/components/footer.html' as footer %}
+    {% import '/components/post/post_template.html' as post_template %}
+    {% import '/components/project/project_template.html' as project_template %}
+    <header>
+        {{ navbar.render('Jhon Doe', 'jhondoe@example.com') }}
+    </header>
+    <main>
+        <!-- Introduction Jumbotron for the user -->
+        <section class="background bg-gray-800 dark:bg-gray-900 text-white py-20 mt-2" style="background-image: linear-gradient(to bottom, #2d3748, #1a202c);">
+            <div class="container mx-auto px-4 h-full flex justify-center">
+                <div class="flex flex-col items-center justify-center">
+                    <h1 class="text-7xl font-bold text-center select-none">Welcome again <span class="bg-gradient-to-r from-fuchsia-500 to-cyan-500 bg-clip-text text-transparent" style="-webkit-text-stroke: 1.5px rgb(255, 246, 246);">{{"Jhon Doe"}}</span></h1>
+                    <p class="text-2xl text-center mt-4 font-extralight select-none">Discover something new today.</p>
+                </div>
+            </div>
+            <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </section>
+        <!-- Separator -->
+        <div class="mx-auto">
+            <hr class="border-t-2 border-gray-200 dark:border-gray-700">
+        </div>
+        <!-- Featured Section -->
+        <section class="mx-auto">
+            <div class="container mx-auto px-4 py-10">
+                <h2 class="text-2xl font-bold text-center">Featured <span class="bg-gradient-to-l from-orange-500 to-red-500 bg-clip-text text-transparent">Posts</span></h2>
+                <!-- Section separator -->
+                <div class="mx-auto mt-2 w-auto">
+                    <hr class="border-t-2 border-gray-200 dark:border-gray-700">
+                </div>
+            </div>
+            <div class="w-full">
+                <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 gap-y-12">
+                    {{post_template.render('https://ik.imagekit.io/pxjkpi3mt/dev_craft_logo_notext.png?updatedAt=1713284535754', 'devcraft', 'DevCraft is the future of the AllInOne platforms for Devs. 🚀', '16:00, Apr, 16, 2024', 'mac', 'id1')}}
+                    {{post_template.render('https://ik.imagekit.io/pxjkpi3mt/dev_craft_logo_notext.png?updatedAt=1713284535754', 'devcraft', 'DevCraft is the future of the AllInOne platforms for Devs. 🚀', '16:00, Apr, 16, 2024', 'android', 'id2')}}
+                    {{post_template.render('https://ik.imagekit.io/pxjkpi3mt/dev_craft_logo_notext.png?updatedAt=1713284535754', 'devcraft', 'DevCraft is the future of the AllInOne platforms for Devs. 🚀', '16:00, Apr, 16, 2024', 'mac', 'id3')}}
+                    {{post_template.render('https://ik.imagekit.io/pxjkpi3mt/dev_craft_logo_notext.png?updatedAt=1713284535754', 'devcraft', 'DevCraft is the future of the AllInOne platforms for Devs. 🚀', '16:00, Apr, 16, 2024', 'web', 'id4')}}
+                    {{post_template.render('https://ik.imagekit.io/pxjkpi3mt/dev_craft_logo_notext.png?updatedAt=1713284535754', 'devcraft', 'DevCraft is the future of the AllInOne platforms for Devs. 🚀', '16:00, Apr, 16, 2024', 'android', 'id5')}}
+                    {{post_template.render('https://ik.imagekit.io/pxjkpi3mt/dev_craft_logo_notext.png?updatedAt=1713284535754', 'devcraft', 'DevCraft is the future of the AllInOne platforms for Devs. 🚀', '16:00, Apr, 16, 2024', 'web', 'id6')}}
+                </div>
+            </div>
+            <div class="flex justify-center w-full">
+                <span class="text-gray-500 text-center w-full text-xs pt-3">Last Update: {{"2 hours ago"}}</span>
+            </div>
+        </section>
+        <section class="mt-5">
+            <div class="container mx-auto px-4 py-10">
+                <h2 class="text-2xl font-bold text-center">Most <span class="bg-gradient-to-br from-blue-500 to-purple-500 bg-clip-text text-transparent">Liked Projects</span></h2>
+                <div class="mx-auto mt-2 w-auto">
+                    <hr class="border-t-2 border-gray-200 dark:border-gray-700">
+                </div>
+            </div>
+            <div class="w-full">
+                <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 gap-y-12">
+                    {{project_template.render('DevCraft', 'DevCraft is the future of the AllInOne platforms for Devs. 🚀', 'Jhon Doe', 0, 0, 0)}}
+                    {{project_template.render('DevCraft', 'DevCraft is the future of the AllInOne platforms for Devs. 🚀', 'Jhon Doe', 0, 0, 0)}}
+                    {{project_template.render('DevCraft', 'DevCraft is the future of the AllInOne platforms for Devs. 🚀', 'Jhon Doe', 0, 0, 0)}}
+                    {{project_template.render('DevCraft', 'DevCraft is the future of the AllInOne platforms for Devs. 🚀', 'Jhon Doe', 0, 0, 0)}}
+                    {{project_template.render('DevCraft', 'DevCraft is the future of the AllInOne platforms for Devs. 🚀', 'Jhon Doe', 0, 0, 0)}}
+                    {{project_template.render('DevCraft', 'DevCraft is the future of the AllInOne platforms for Devs. 🚀', 'Jhon Doe', 0, 0, 0)}}
+                </div>
+            </div>
+        </section>
+        <section class="mt-5">
+            <div class="container mx-auto px-4 py-10">
+                <h2 class="text-2xl font-bold text-center">Todays <span class="bg-gradient-to-br from-green-300 to-emerald-600 bg-clip-text text-transparent">Recomended Course</span></h2>
+                <div class="mx-auto mt-2 w-auto">
+                    <hr class="border-t-2 border-gray-200 dark:border-gray-700">
+                </div>
+            </div>
+            <div>
+                <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 gap-y-12">
+                    <!-- Just a course component with an id -->
+                    <div class="flex justify-center w-full h-full">
+
+                    </div>
+                    <div>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        {{ footer.render() }}
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+    <script src="{{url_for('static', filename='src/js/app/home/main.js')}}"></script>
+</html>

@@ -1,0 +1,22 @@
+{% macro render(course_id) %}
+
+{% set course = courses[course_id] %}
+
+
+{% set course_id = course['id'] %}
+{% set course_name = course['name'] %}
+{% set course_description = course['description'] %}
+{% set course_author = course['author'] %}
+{% set course_duration = course['duration'] %}
+{% set course_image = course['image'] %}
+{% set course_category = course['category'] %}
+{% set course_rating = course['rating'] %}
+{% set course_price = course['price'] %}
+{% set course_discount = course['discount'] %}
+{% set course_tags = course['tags'] %}
+
+<div>
+    
+</div>
+
+{% endmacro %}

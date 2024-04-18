@@ -1,0 +1,26 @@
+{% macro render(user_image, user_name, post_content, post_publish_date, post_platform, post_id) %}
+<div class="hover:cursor-pointer border-2 border-[#eaeaea] rounded-lg h-[200px] w-full flex flex-col justify-between" style="background-image: linear-gradient(to bottom, #2d3748, #1a202c);" onclick="redir_to_post('{{post_id}}')">
+    <div class="flex flex-col justify-between p-4 h-full">
+        <div>
+            <div class="w-full flex justify-between items-center">
+                <div class="flex items-center">
+                    <img src="{{ user_image }}" alt="profile-pic" width="32" height="32" class="rounded-full p-1 border-2 border-white">
+                    <span>
+                        <a href="/app/profile/{{user_name}}" class="text-gray-400 font-extralight text-sm px-2 hover:text-white transition-colors delay-75">@devcraft</a>
+                    </span>
+                </div>
+                <span>
+                    <i class="fas fa-ellipsis-h text-gray-400 hover:text-white transition-colors delay-75"></i>
+                </span>
+            </div>
+            <div class="flex justify-center items-center h-full">
+                <p class="text-left mt-2">DevCraft is the future of the AllInOne platforms for Devs. 🚀</p>
+            </div>
+        </div>
+        <div class="text-left w-full flex">
+            <p class="text-gray-400 font-extralight text-xs">Published: {{ post_publish_date }}</p>
+            <a href="{{ 'android' if post_platform == 'android' else 'other' }}" class="text-white underline text-xs px-1">{{ 'DevCraft Web' if post_platform == 'web' else 'DevCraft Android' if post_platform == 'android' else 'DevCraft Other' }}</a>
+        </div>
+    </div>
+</div>
+{% endmacro %}

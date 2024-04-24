@@ -14,5 +14,8 @@ package-lock.json
 *.pyo
 *.pyd
 __pycache__/
-utils/admin_tools/
-/utils/devcraftadmin-cli.py
+/utils/admin_tools/*.py
+utils/devcraftadmin-cli.py
+utils/devcraftadmin-cli.pyc
+utils/devcraftadmin-cli.pyo
+utils/devcraftadmin-cli.pyd

@@ -10,7 +10,6 @@ import os
 import json
 from pymongo import MongoClient
 from dotenv import load_dotenv
-from schemas import user
 
 # Load the environment variables
 load_dotenv()
@@ -40,13 +39,11 @@ def createCollection(db, collection_name):
         }
     
 # Insert a new document
-def insertDocument(db, collection_name, document):
+def insertDocument(collection, document):
     try:
-        collection = db[collection_name]
         result = collection.insert_one(document)
         return result.inserted_id
     except Exception as e:
-        print(f"Error: {str(e)}")
         return {
             "error": str(e)
         }
@@ -67,11 +64,6 @@ def checkDocument(document, schema):
         if key not in document:
             return {"status": False, "key": f"Key '{key}' is missing."}
     return {"status": True, "document": document}
-
-def checkCollection(db, collection_name):
-    if collection_name in db.list_collection_names():
-        return True
-    return False
 
 # TEST
 if __name__ == "__main__":

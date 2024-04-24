@@ -8,3 +8,11 @@ yarn-debug.log
 yarn-error.log
 yarn.lock
 package-lock.json
+
+# Gitigore for python
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+utils/admin_tools/
+/utils/devcraftadmin-cli.py
